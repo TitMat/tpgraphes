@@ -213,8 +213,11 @@ public class Path {
      * @deprecated Need to be implemented.
      */
     public float getLength() {
-        // TODO:
-        return 0;
+        float totalLength = 0;
+        for (Arc arc : arcs) {
+            totalLength += arc.getLength();
+        }
+        return totalLength;
     }
 
     /**
@@ -228,8 +231,9 @@ public class Path {
      * @deprecated Need to be implemented.
      */
     public double getTravelTime(double speed) {
-        // TODO:
-        return 0;
+        double totalDistance = getLength();
+        double travelTime = totalDistance / (speed * 1000 / 3600); // Convert speed from km/h to m/s
+        return travelTime;
     }
 
     /**
