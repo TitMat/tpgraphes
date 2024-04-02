@@ -37,11 +37,14 @@ public class Path {
         List<Arc> arcsfinal = new ArrayList<Arc>();
         double time;
         double timermin = 100000;
+
+        if(nodes.size() ==0) return new Path(graph, arcsfinal);
         if(nodes.size()==1){
             return new Path(graph, nodes.get(0));
         }
+        if(nodes.get(0) == null) throw new IllegalArgumentException();
         for(int i = 0; i<=nodes.size() -2; i++) {
-            int bestindex = 0;
+            int bestindex = -1;
             arcs = nodes.get(i).getSuccessors();
             for (int j = 0; j <= arcs.size() - 1; j++) {
                 time = arcs.get(j).getMinimumTravelTime();
@@ -50,6 +53,8 @@ public class Path {
                     bestindex = j;
                 }
             }
+            if(bestindex==-1) throw new IllegalArgumentException();
+            if(arcs.get(bestindex)==null) throw new IllegalArgumentException();
             arcsfinal.add(arcs.get(bestindex));
         }
         return new Path(graph, arcsfinal);
@@ -73,11 +78,14 @@ public class Path {
         List<Arc> arcsfinal = new ArrayList<Arc>();
         double lenght;
         double lenghtmin = 100000;
+        if(nodes.size() ==0) return new Path(graph, arcsfinal);
+
         if(nodes.size()==1){
             return new Path(graph, nodes.get(0));
         }
+        if(nodes.get(0) == null) throw new IllegalArgumentException();
         for(int i = 0; i<=nodes.size() -2; i++) {
-            int bestindex = 0;
+            int bestindex = -1;
             arcs = nodes.get(i).getSuccessors();
             for (int j = 0; j <= arcs.size() - 1; j++) {
                 lenght = arcs.get(j).getLength();
@@ -86,6 +94,8 @@ public class Path {
                     bestindex = j;
                 }
             }
+            if(bestindex==-1) throw new IllegalArgumentException();
+            if(arcs.get(bestindex)==null) throw new IllegalArgumentException();
             arcsfinal.add(arcs.get(bestindex));
         }
         return new Path(graph, arcsfinal);
